@@ -2,6 +2,8 @@
 const jsContainer = document.getElementById("js");
 const reactContainer = document.getElementById("react");
 
+const render = () => {
+
   jsContainer.innerHTML = `
     <div class="demo">
       Hello JS
@@ -24,3 +26,6 @@ const reactContainer = document.getElementById("react");
     ),
     reactContainer
   );
+}
+
+setInterval(render, 1000);
