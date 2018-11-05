@@ -5,6 +5,8 @@ const reactContainer = document.getElementById("react");
   jsContainer.innerHTML = `
     <div class="demo">
       Hello JS
+      <input />
+      <p>${new Date()}</p>
     </div>
   `;
 
@@ -13,6 +15,12 @@ const reactContainer = document.getElementById("react");
       "div", /*  type */
       { className: "demo" }, /* [properties or props] */
       "Hello React ", /* [...children] */ 
+      React.createElement("input"),
+      React.createElement(
+        "p",
+        null,
+        new Date().toString()
+      )
     ),
     reactContainer
   );
