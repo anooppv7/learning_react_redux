@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   handleClick() {
-    this.state.counter ++;
+    this.setState({counter : this.state.counter + 1} );
   }
 
   render(props) {
