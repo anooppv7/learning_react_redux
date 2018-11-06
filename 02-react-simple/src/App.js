@@ -9,7 +9,9 @@ class App extends React.Component {
   render(props) {
     return (
       <div className="App">
-        Hello {this.props.name} !
+        <button>
+          Upvote
+        </button>
       </div>
     );
   }
