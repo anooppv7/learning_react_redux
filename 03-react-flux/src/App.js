@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 
-class CountTracker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0};
-  }
-
-  render() {
-    return (
-      <div>
-        { this.state.counter }
-      </div>
-    );
-  }
-}
+const CountTracker = (props) => {
+  return (
+    <div>
+      { props.counter }
+    </div>
+  );
+};
 
 class UpVote extends React.Component {
 	constructor(props) {
