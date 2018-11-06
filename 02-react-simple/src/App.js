@@ -5,6 +5,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {counter: 0};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
