@@ -15,11 +15,14 @@ class App extends React.Component {
       (currentState) => ({ counter : currentState.counter + 1 }),
       () => console.log("async :: " + this.state.counter)
     );
-    console.log(this.state.counter);
-    this.setState({counter : this.state.counter + 1} );
-    console.log(this.state.counter);
-    this.setState({counter : this.state.counter + 1} );
-    console.log(this.state.counter);
+    this.setState(
+      (currentState) => ({ counter : currentState.counter + 1 }),
+      () => console.log("async :: " + this.state.counter)
+    );
+    this.setState(
+      (currentState) => ({ counter : currentState.counter + 1 }),
+      () => console.log("async :: " + this.state.counter)
+    );
   }
 
   render(props) {
