@@ -20,7 +20,8 @@ class UpVote extends React.Component {
 	handleClick() {
 		this.setState(state => ({
 			counter: state.counter + 1
-		}));
+    }));
+    this.props.incrementCounter();
 	}
 
 	render() {
@@ -32,12 +33,23 @@ class UpVote extends React.Component {
 	}
 }
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { overallCounter : 0 };
+  }
+
+  incrementCounter = () => {
+    this.setState({
+      overallCounter: this.state.overallCounter + 1 
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <CountTracker counter="0"/>
+        <CountTracker counter={this.state.overallCounter} />
         <br/>
-        <UpVote counter="0"/>
+        <UpVote counter="0" incrementCounter={this.incrementCounter}/>
       </div>
     );
   }
