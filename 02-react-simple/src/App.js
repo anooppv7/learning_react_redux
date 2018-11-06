@@ -11,7 +11,16 @@ class App extends React.Component {
   }
 
   handleClick() {
-    this.setState({counter : this.state.counter + 1} );
+    this.setState(
+      // updater function
+      function(currentState, props) {
+        return { counter : currentState.counter + 1 };
+      }, 
+      // callback function when updater finishes
+      function() {
+        console.log("async :: " + this.state.counter);
+      }
+    );
     console.log(this.state.counter);
     this.setState({counter : this.state.counter + 1} );
     console.log(this.state.counter);
