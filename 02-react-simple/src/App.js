@@ -1,9 +1,9 @@
 import React from 'react';
 
-const App = function() {
+const App = function(props) {
     return (
       <div className="App">
-        Hello World!
+        Hello {props.name} !
       </div>
     );
   }
