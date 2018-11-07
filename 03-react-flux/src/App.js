@@ -1,92 +1,117 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Flux from 'flux'
+import { EventEmitter } from 'events'
 
-const CountTracker = (props) => {
-  return (
-    <div>
-      { props.counter }
-    </div>
-  );
+/************************************* APP CONSTANTS : START *************************************/
+
+var AppConstants = {
+  ADD_ITEM: 'ADD_ITEM',
 };
 
-class UpVote extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {counter: 0};
+/************************************* APP CONSTANTS : END *************************************/
 
-    // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
-	}
+/************************************* STORE : START *************************************/
 
-	handleClick() {
-		this.setState(state => ({
-			counter: state.counter + 1
-    }));
-    this.props.incrementCounter();
-	}
+var _items = {};
 
-	render() {
-		return (
-			<button onClick={this.handleClick}>
-				{this.state.counter} Upvote
-			</button>
-		);
-	}
-}
+var AppStore = new EventEmitter();
 
-class DownVote extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {counter: 0};
+AppStore.getAll = function() {
+  return _items;
+};
 
-    // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
-	}
+AppStore.create = function(item) {
+  var id = Date.now();
+  _items[id] = item;
+};
 
-	handleClick() {
-		this.setState(state => ({
-			counter: state.counter + 1
-    }));
-    this.props.decrementCounter();
-	}
+AppStore.emitChange = function() {
+  this.emit('change');
+};
 
-	render() {
-		return (
-			<button onClick={this.handleClick}>
-				{this.state.counter} Downvote
-			</button>
-		);
-	}
-}
+AppStore.addChangeListener = function(callback) {
+  this.on('change', callback);
+};
 
-class App extends Component {
+AppStore.removeChangeListener = function(callback) {
+  this.removeListener('change', callback);
+};
+
+/************************************* STORE : END *************************************/
+
+/************************************* DISPATCHER : START *************************************/
+
+var AppDispatcher = new Flux.Dispatcher();
+
+AppDispatcher.register(function(payload) {
+  var item = payload.item, actionType = payload.actionType;
+  switch (actionType) {
+    case AppConstants.ADD_ITEM:
+      AppStore.create(item);
+      break;
+    default:
+      return true;
+  }
+  AppStore.emitChange();
+  return true;
+});
+
+/************************************* DISPATCHER : END *************************************/
+
+/************************************* ACTION CREATOR : START *************************************/
+
+var AppActions = {
+  addItem: function(item) {
+    AppDispatcher.dispatch({
+      actionType: AppConstants.ADD_ITEM,
+      item: item
+    });
+  }
+};
+
+/************************************* ACTION CREATOR : END *************************************/
+
+var getAppState = () => {
+  var items = AppStore.getAll();
+  return items;
+};
+
+class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { overallCounter : 0 };
+    this.state = { items : getAppState() };
   }
 
-  incrementCounter = () => {
-    this.setState({
-      overallCounter: this.state.overallCounter + 1 
-    });
-  };
+  _onChange = () => {
+    this.setState({ items : getAppState() });
+  }
 
-  decrementCounter = () => {
-    this.setState({
-      overallCounter: this.state.overallCounter - 1 
-    });
-  };
+  componentDidMount() {
+    AppStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    AppStore.removeChangeListener(this._onChange);
+  }
+
+  addItem() {
+    AppActions.addItem('item added on ' + Date.now());
+  }
 
   render() {
+    var itemNodes = [];
+    for (var item in this.state.items) {
+      itemNodes.push(
+        <span key={item}>{item}<br/></span>
+      );
+    };
     return (
-      <div className="App">
-        <CountTracker counter={this.state.overallCounter} />
-        <br/>
-        <UpVote counter="0" incrementCounter={this.incrementCounter}/>
-        <br/><br/>
-        <DownVote counter="0" decrementCounter={this.decrementCounter}/>
+      <div>
+        <h3 onClick={this.addItem}>Click to add an Item</h3>
+        {itemNodes}
       </div>
-    );
+    )
   }
-}
+};
 
 export default App;
