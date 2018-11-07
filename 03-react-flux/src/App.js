@@ -71,17 +71,7 @@ var AppActions = {
 
 /************************************* ACTION CREATOR : END *************************************/
 
-var getAppState = () => {
-  var items = AppStore.getAll();
-  return items;
-};
-
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { items : getAppState() };
-  }
-
   _onChange = () => {
     console.log(AppStore.getAll());
   }
@@ -99,16 +89,10 @@ class App extends React.Component {
   }
 
   render() {
-    var itemNodes = [];
-    for (var item in this.state.items) {
-      itemNodes.push(
-        <span key={item}>{item}<br/></span>
-      );
-    };
+    window.addItem = this.addItem;
     return (
-      <div>
-        <h3 onClick={this.addItem}>Click to add an Item</h3>
-        {itemNodes}
+      <div> 
+        Simplifying ...
       </div>
     )
   }
