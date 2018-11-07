@@ -2,14 +2,6 @@ import React from 'react';
 import Flux from 'flux'
 import { EventEmitter } from 'events'
 
-/************************************* APP CONSTANTS : START *************************************/
-
-var AppConstants = {
-  ADD_ITEM: 'ADD_ITEM',
-};
-
-/************************************* APP CONSTANTS : END *************************************/
-
 /************************************* STORE : START *************************************/
 
 var _items = {};
@@ -46,7 +38,7 @@ var AppDispatcher = new Flux.Dispatcher();
 AppDispatcher.register(function(payload) {
   var item = payload.item, actionType = payload.actionType;
   switch (actionType) {
-    case AppConstants.ADD_ITEM:
+    case "ADD_ITEM":
       AppStore.create(item);
       break;
     default:
@@ -63,7 +55,7 @@ AppDispatcher.register(function(payload) {
 var AppActions = {
   addItem: function(item) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.ADD_ITEM,
+      actionType: "ADD_ITEM",
       item: item
     });
   }
