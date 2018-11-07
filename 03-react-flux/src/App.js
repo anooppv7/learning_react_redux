@@ -83,7 +83,7 @@ class App extends React.Component {
   }
 
   _onChange = () => {
-    this.setState({ items : getAppState() });
+    console.log(AppStore.getAll());
   }
 
   componentDidMount() {
