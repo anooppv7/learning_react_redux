@@ -50,19 +50,6 @@ AppDispatcher.register(function(payload) {
 
 /************************************* DISPATCHER : END *************************************/
 
-/************************************* ACTION CREATOR : START *************************************/
-
-var AppActions = {
-  addItem: function(item) {
-    AppDispatcher.dispatch({
-      actionType: "ADD_ITEM",
-      item: item
-    });
-  }
-};
-
-/************************************* ACTION CREATOR : END *************************************/
-
 class App extends React.Component {
   _onChange = () => {
     console.log(AppStore.getAll());
@@ -77,7 +64,10 @@ class App extends React.Component {
   }
 
   addItem() {
-    AppActions.addItem('item added on ' + Date.now());
+    AppDispatcher.dispatch({
+      actionType: "ADD_ITEM",
+      item: 'item added on ' + Date.now()
+    });
   }
 
   render() {
