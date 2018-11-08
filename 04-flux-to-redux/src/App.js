@@ -5,10 +5,6 @@ import Flux from 'flux'
 
 var _items = {};
 
-export function getState() {
-  return _items;
-}
-
 /************************************* STORE : END *************************************/
 
 /************************************* DISPATCHER : START *************************************/
@@ -22,9 +18,9 @@ export function handle (payload) {
       _items = [..._items, item]; // ideally should be object based, but array for easier understanding
       break;
     default:
-      return true;
+      break;
   }
-  return true;
+  return _items;
 };
 
 /************************************* DISPATCHER : END *************************************/
