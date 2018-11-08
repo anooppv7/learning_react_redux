@@ -1,23 +1,9 @@
 import React from 'react';
-import Flux from 'flux'
 import { createStore } from "redux";
 
-/************************************* DISPATCHER : START *************************************/
-
-var AppDispatcher = new Flux.Dispatcher();
-
-/************************************* DISPATCHER : END *************************************/
-
 class App extends React.Component {
-  addItem() {
-    AppDispatcher.dispatch({
-      actionType: "ADD_ITEM",
-      item: 'item added on ' + Date.now()
-    });
-  }
 
   render() {
-    window.addItem = this.addItem;
 
     // #1
     const reducer = function (state = [], action) {
@@ -49,7 +35,7 @@ class App extends React.Component {
 
     return (
       <div> 
-        Simplifying ...
+        Simplest Redux
       </div>
     )
   }
