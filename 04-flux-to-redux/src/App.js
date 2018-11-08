@@ -8,26 +8,9 @@ var _items = {};
 
 var AppStore = new EventEmitter();
 
-AppStore.getAll = function() {
+export function getState() {
   return _items;
-};
-
-AppStore.create = function(item) {
-  var id = Date.now();
-  _items[id] = item;
-};
-
-AppStore.emitChange = function() {
-  this.emit('change');
-};
-
-AppStore.addChangeListener = function(callback) {
-  this.on('change', callback);
-};
-
-AppStore.removeChangeListener = function(callback) {
-  this.removeListener('change', callback);
-};
+}
 
 /************************************* STORE : END *************************************/
 
