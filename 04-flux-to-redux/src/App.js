@@ -39,7 +39,7 @@ export function handle (payload) {
   var item = payload.item, actionType = payload.actionType;
   switch (actionType) {
     case "ADD_ITEM":
-      AppStore.create(item);
+      _items = [..._items, item]; // ideally should be object based, but array for easier understanding
       break;
     default:
       return true;
