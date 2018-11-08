@@ -32,6 +32,8 @@ class App extends React.Component {
     // #2
     const store = createStore(reducer, "");
 
+    window.store = store;
+
     // #3
     store.subscribe(() => {
       console.log("Store is now", store.getState());
