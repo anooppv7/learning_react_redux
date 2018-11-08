@@ -5,16 +5,13 @@ import Flux from 'flux'
 
 var AppDispatcher = new Flux.Dispatcher();
 
-export function handle (_items = [], payload) {
-  var item = payload.item, actionType = payload.actionType;
-  switch (actionType) {
+export function handle (state = [], action) {
+  switch (action.type) {
     case "ADD_ITEM":
-      _items = [..._items, item]; // ideally should be object based, but array for easier understanding
-      break;
+      return [...state, action.payload]; // ideally should be object based, but array for easier understanding
     default:
-      break;
+      return state;
   }
-  return _items;
 };
 
 /************************************* DISPATCHER : END *************************************/
