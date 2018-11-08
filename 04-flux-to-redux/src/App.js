@@ -1,12 +1,9 @@
 import React from 'react';
 import Flux from 'flux'
-import { EventEmitter } from 'events'
 
 /************************************* STORE : START *************************************/
 
 var _items = {};
-
-var AppStore = new EventEmitter();
 
 export function getState() {
   return _items;
@@ -27,7 +24,6 @@ export function handle (payload) {
     default:
       return true;
   }
-  AppStore.emitChange();
   return true;
 };
 
@@ -35,15 +31,7 @@ export function handle (payload) {
 
 class App extends React.Component {
   _onChange = () => {
-    console.log(AppStore.getAll());
-  }
-
-  componentDidMount() {
-    AppStore.addChangeListener(this._onChange);
-  }
-
-  componentWillUnmount() {
-    AppStore.removeChangeListener(this._onChange);
+    console.log(getState());
   }
 
   addItem() {
