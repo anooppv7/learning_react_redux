@@ -6,10 +6,12 @@ import ReactDOM from 'react-dom';
 const Reduxbase = function() {
 
   // #1
-  const reducer = function (state = [], action) {
+  const reducer = function (state = 0, action) {
     switch (action.type) {
-      case "ADD_ITEM":
-        return [...state, action.payload]; // ideally should be object based, but array for easier understanding
+      case "INCREMENT":
+        return state + 1;
+      case "DECREMENT":
+        return state - 1;
       default:
         return state;
     }
@@ -26,11 +28,9 @@ const Reduxbase = function() {
     ReactDOM.render(<App data={store.getState()}/>, document.getElementById('root'));
   });
 
-  // #4
-  store.dispatch({ type: "ADD_ITEM", payload: 'item added on ' + Date.now() });
-  // same as #4 for ease of use from console
+  // #4 for ease of use from console
   const dispatchCommand = () => {
-    store.dispatch({ type: "ADD_ITEM", payload: 'item added on ' + Date.now() });
+    store.dispatch({ type: "INCREMENT", payload: '' });
   }
   window.dispatchCommand = dispatchCommand;
 };
