@@ -25,7 +25,10 @@ const Reduxbase = function() {
   // #3
   store.subscribe(() => {
     console.log("Store is now", store.getState());
-    ReactDOM.render(<App data={store.getState()}/>, document.getElementById('root'));
+    ReactDOM.render(<App 
+                      data={store.getState()}
+                      onIncrement={ () => store.dispatch({ type: "INCREMENT", payload: '' }) }
+                      />, document.getElementById('root'));
   });
 
   // #4 for ease of use from console

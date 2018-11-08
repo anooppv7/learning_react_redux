@@ -9,7 +9,8 @@ class App extends React.Component {
   render() {
     return (
       <div> 
-        { this.props.data }
+        <h1>{ this.props.data }</h1>
+        <button onClick={this.props.onIncrement}>UpVote</button>
       </div>
     )
   }
