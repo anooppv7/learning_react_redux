@@ -35,7 +35,7 @@ AppStore.removeChangeListener = function(callback) {
 
 var AppDispatcher = new Flux.Dispatcher();
 
-AppDispatcher.register(function(payload) {
+export function handle (payload) {
   var item = payload.item, actionType = payload.actionType;
   switch (actionType) {
     case "ADD_ITEM":
@@ -46,7 +46,7 @@ AppDispatcher.register(function(payload) {
   }
   AppStore.emitChange();
   return true;
-});
+};
 
 /************************************* DISPATCHER : END *************************************/
 
