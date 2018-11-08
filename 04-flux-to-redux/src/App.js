@@ -5,7 +5,7 @@ import Flux from 'flux'
 
 var AppDispatcher = new Flux.Dispatcher();
 
-export function handle (state = [], action) {
+const reducer = function (state = [], action) {
   switch (action.type) {
     case "ADD_ITEM":
       return [...state, action.payload]; // ideally should be object based, but array for easier understanding
