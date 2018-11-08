@@ -1,17 +1,11 @@
 import React from 'react';
 import Flux from 'flux'
 
-/************************************* STORE : START *************************************/
-
-var _items = {};
-
-/************************************* STORE : END *************************************/
-
 /************************************* DISPATCHER : START *************************************/
 
 var AppDispatcher = new Flux.Dispatcher();
 
-export function handle (payload) {
+export function handle (_items = [], payload) {
   var item = payload.item, actionType = payload.actionType;
   switch (actionType) {
     case "ADD_ITEM":
