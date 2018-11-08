@@ -1,4 +1,7 @@
 import { createStore } from "redux";
+import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const Reduxbase = function() {
 
@@ -20,6 +23,7 @@ const Reduxbase = function() {
   // #3
   store.subscribe(() => {
     console.log("Store is now", store.getState());
+    ReactDOM.render(<App data={store.getState()}/>, document.getElementById('root'));
   });
 
   // #4
