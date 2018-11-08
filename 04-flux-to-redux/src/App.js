@@ -1,5 +1,6 @@
 import React from 'react';
 import Flux from 'flux'
+import { createStore } from "redux";
 
 /************************************* DISPATCHER : START *************************************/
 
@@ -40,6 +41,9 @@ class App extends React.Component {
           return state;
       }
     };
+
+    // #2
+    const store = createStore(reducer, "");
 
     return (
       <div> 
