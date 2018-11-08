@@ -28,6 +28,7 @@ const Reduxbase = function() {
     ReactDOM.render(<App 
                       data={store.getState()}
                       onIncrement={ () => store.dispatch({ type: "INCREMENT", payload: '' }) }
+                      onDecrement={ () => store.dispatch({ type: "DECREMENT", payload: '' }) }
                       />, document.getElementById('root'));
   });
 
