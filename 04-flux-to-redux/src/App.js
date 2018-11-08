@@ -39,6 +39,14 @@ class App extends React.Component {
       console.log("Store is now", store.getState());
     });
 
+    // #4
+    store.dispatch({ type: "ADD_ITEM", payload: 'item added on ' + Date.now() });
+    // same as #4 for ease of use from console
+    const dispatchCommand = () => {
+      store.dispatch({ type: "ADD_ITEM", payload: 'item added on ' + Date.now() });
+    }
+    window.dispatchCommand = dispatchCommand;
+
     return (
       <div> 
         Simplifying ...
