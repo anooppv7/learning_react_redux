@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+
 
 //actions
 export const onIncrement = () => ({ type: "INCREMENT", payload: '' });
@@ -16,4 +17,15 @@ const reducer = function (state = 0, action) {
     }
   };
 
-  export const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  const loggingMiddleware = function(store) {
+    return function(next) {
+      return function(action) {
+        console.log(store.getState())
+      }
+    }
+  }
+
+  const middleware = applyMiddleware(loggingMiddleware);
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  export const store = createStore(reducer, composeEnhancers(middleware));
