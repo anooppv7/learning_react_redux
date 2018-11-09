@@ -17,13 +17,9 @@ const reducer = function (state = 0, action) {
     }
   };
 
-  const loggingMiddleware = function(store) {
-    return function(next) {
-      return function(action) {
+  const loggingMiddleware = store => next => action => {
         console.log(store.getState())
         next(action)
-      }
-    }
   }
 
   const middleware = applyMiddleware(loggingMiddleware);
